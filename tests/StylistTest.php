@@ -49,6 +49,21 @@
             $this->assertEquals(1, $result);
         }
 
+        function test_save()
+        {
+            //Arrange
+            $name = "Victoria";
+            $id = 1;
+            $new_stylist = new Stylist($name, $id);
+
+            //Act
+            $new_stylist->save();
+
+            //Assert
+            $result = Stylist::getAll();
+            $this->assertEquals($new_stylist, $result[0]);
+        }
+
         function test_getAll()
         {
             //Arrange

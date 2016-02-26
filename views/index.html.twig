@@ -4,9 +4,23 @@
 </head>
 <body>
   <div class="container">
-    <h1>Hair Salon</h1>
+    <h1>Hair Salon Directory</h1>
 
-    <p>Stylists</p>
+    <form action="/" method="post">
+      <label for="stylist_name">Stylist Name:</label>
+      <input name="stylist_name" type="text">
+      <button type="submit">Add</button>
+    </form>
+
+    <p><em>Stylists</em></p>
+
+      {% for stylist in stylists %}
+        <li><a href="/stylist/{id}">{{ stylist.getName }}</a></li>
+          <form action="/{id}/edit" method="get">
+          <button type="submit">Edit</button>
+          <br><br>
+
+      {% endfor %}
 
 
   </div>

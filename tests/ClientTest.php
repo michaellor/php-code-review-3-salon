@@ -6,6 +6,7 @@
     */
 
     require_once "src/Client.php";
+    require_once "src/Stylist.php";
 
     $server = 'mysql:host=localhost;dbname=hair_salon_test';
     $username = 'root';
@@ -19,6 +20,7 @@
         protected function tearDown()
         {
             Client::deleteAll();
+            Stylist::deleteAll();
         }
 
         function test_getName()
@@ -73,7 +75,7 @@
 
         function test_getAll()
         {
-            //Assert
+            //Arrange
             $name = "John";
             $name2 = "Jill";
             $stylist_id = 1;
@@ -92,7 +94,7 @@
 
         function test_deleteAll()
         {
-            //Assert
+            //Arrange
             $name = "John";
             $stylist_id = 1;
             $id = 1;
@@ -105,6 +107,30 @@
 
             //Assert
             $this->assertEquals([], $result);
+        }
+
+        function test_find()
+        {
+            //Aarrange
+            $stylist_name = "Victoria";
+            $id = null;
+            $test_stylist = new Stylist($stylist_name, $id);
+            $test_stylist->save();
+
+            $name = "John";
+            $stylist_id = $test_stylist->getId();
+            $new_client = new Client($name, $stylist_id, $id);
+            $new_client->save();
+
+            $name2 = "Sylvie";
+            $new_client2 = new Client($name2, $stylist_id, $id);
+            $new_client2->save();
+
+            //Act
+            $result = Client::find($new_client->getId());
+
+            //Assert
+            $this->assertEquals($new_client, $result);
         }
 
     }

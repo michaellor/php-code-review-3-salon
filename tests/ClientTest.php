@@ -160,7 +160,7 @@
             $this->assertEquals([$new_client], $result);
         }
 
-        function test_Update()
+        function test_update()
         {
             //Arrange
             $name = "John";

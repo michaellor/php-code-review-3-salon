@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+  <div class="container">
+    <h1>Hair Salon Directory</h1>
+
+    <p>Add a stylist</p>
+
+    <form action="/stylists" method="post">
+      <label for="stylist_name">Name:</label>
+      <input name="stylist_name" type="text">
+      <button type="submit">Add</button>
+    </form>
+
+    <p><em>Stylists</em></p>
+
+      {% for stylist in stylists %}
+        <li><a href="/stylists/{{ stylist.getId }}">{{ stylist.getName }}</a>
+        <form action="/stylists/{{ cuisine.getId }}" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <button type="submit">Delete</button>
+        </form>
+        </li>
+      {% endfor %}
+
+
+  </div>
+</body>
+</html>

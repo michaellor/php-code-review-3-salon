@@ -5,27 +5,12 @@
 <body>
   <div class="container">
     <h1>{{ stylist.getName }}</h1>
-
-    <form action="/stylist" method="post">
-      <label for="client_name">Client Name:</label>
-      <input name="client_name" type="text">
-      <button type="submit">Add</button>
+    <p>Input New Name:
+    <form action="/stylist/{{ stylist.getId }}/edit" method="post">
+      <label for="stylist_name">Name:</label>
+      <input name="stylist_name" type="text">
+      <button type="submit">OK</button>
     </form>
-
-    <p>Clients</p>
-
-      {% for client in clients %}
-        <li><a href="/stylist/{id}">{{ client.getName }}</a></li>
-          <form action="/stylist/{id}/edit" method="get">
-            <button type="submit">Edit</button>
-          </form>
-          <form action="/" method="post">
-            <input name="_method" type="hidden" value="delete">
-            <button type="submit">Delete</button>
-          </form>
-      {% endfor %}
-
-
   </div>
 </body>
 </html>

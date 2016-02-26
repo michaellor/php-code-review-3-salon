@@ -14,29 +14,28 @@
     'twig.path' => __DIR__.'/../views'
     ));
 
+    //Landing page
     $app->get("/", function () use ($app){
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
-    $app->get("/stylist/{id}", function () use ($app){
-        return $app['twig']->render('stylist.html.twig', array('stylists' => Stylist::getAll()));
+    //Page listing stylists
+    $app->get("/stylists", function () use ($app){
+        return $app['twig']->render('stylists.html.twig', array('stylists' => Stylist::getAll()));
     });
 
-    $app->get("/stylist/{id}/edit", function () use ($app){
-        return $app['twig']->render('stylist_edit.html.twig', array('stylists' => Stylist::getAll()));
-    });
-
-    $app->post("/stylist", function () use ($app){
+    $app->post("/stylists", function () use ($app){
         $new_stylist = new Stylist($_POST['stylist_name']);
         $new_stylist->save();
-        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+        return $app['twig']->render('stylists.html.twig', array('stylists' => Stylist::getAll()));
     });
 
-    $app->delete("/{id}", function($id) use ($app){
+
+
+
+    $app->delete("/stylists/{id}", function($id) use ($app) {
         $stylist = Stylist::find($id);
-        $stylist->delete();
-        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
-    });
+    })
 
     return $app;
 

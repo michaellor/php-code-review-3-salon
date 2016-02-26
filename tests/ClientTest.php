@@ -159,6 +159,23 @@
             //Assert
             $this->assertEquals([$new_client], $result);
         }
+
+        function test_Update()
+        {
+            //Arrange
+            $name = "John";
+            $stylist_id = 1;
+            $id = 1;
+            $new_client = new Client($name, $stylist_id, $id);
+            $new_client->save();
+            $new_name = "Johnson";
+
+            //Act
+            $new_client->update($new_name);
+
+            //Assert
+            $this->assertEquals("Johnson", $new_client->getName());
+        }
     }
 
 ?>

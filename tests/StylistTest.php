@@ -105,18 +105,6 @@
             $this->assertEquals([$new_client], $result);
         }
 
-        function save()
-        {
-            //Arrange
-            $name = "Victoria";
-            $new_stylist = new Stylist($name, $id);
-
-            //Act
-            $new_stylist->save();
-
-            //Assert
-            $result = Stylist::getAll();
-        }
 
 
     }

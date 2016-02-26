@@ -39,6 +39,12 @@ class Client
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
+    function update($new_client_name)
+    {
+        $GLOBALS['DB']->exec("UPDATE clients SET client_name = {'$new_client_name'} WHERE id = {$this->getId()};");
+        $this->setName($new_client_name);
+    }
+
     static function getAll()
     {
         $returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients;");

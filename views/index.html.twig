@@ -17,9 +17,12 @@
       {% for stylist in stylists %}
         <li><a href="/stylist/{id}">{{ stylist.getName }}</a></li>
           <form action="/{id}/edit" method="get">
-          <button type="submit">Edit</button>
-          <br><br>
-
+            <button type="submit">Edit</button>
+          </form>
+          <form action="/" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button type="submit">Delete</button>
+          </form>
       {% endfor %}
 
 

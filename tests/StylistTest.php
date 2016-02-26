@@ -33,7 +33,20 @@
 
             //Assert
             $this->assertEquals("Victoria", $result);
+        }
 
+        function test_getId()
+        {
+            //Arrange
+            $name = "Victoria";
+            $id = 1;
+            $new_stylist = new Stylist($name, $id);
+
+            //Act
+            $result = $new_stylist->getId($id);
+
+            //Assert
+            $this->assertEquals(1, $result);
         }
 
 

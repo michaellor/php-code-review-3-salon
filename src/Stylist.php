@@ -26,5 +26,22 @@
             return $this->id;
         }
 
+        
+
+        static function getAll()
+        {
+            $returned_stylists = $GLOBALS['DB']->query("SELECT * FROM stylists;");
+
+            $stylists = array();
+            foreach($returned_stylists as $stylist)
+            {
+                $stylist_name = $stylist['stylist_name'];
+                $id = $stylist['id'];
+                $new_stylist = new Stylist($stylist_name, $id);
+                array_push($stylists, $new_stylist);
+            }
+            return $stylists;
+        }
+
       }
 ?>

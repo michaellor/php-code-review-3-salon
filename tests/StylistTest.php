@@ -49,6 +49,34 @@
             $this->assertEquals(1, $result);
         }
 
+        function test_getAll()
+        {
+            //Arrange
+            $name = "Victoria";
+            $id = 1;
+            $new_stylist = new Stylist($name, $id);
+
+            //Act
+            $result = Stylist::getAll();
+
+            //Assert
+            $this->assertEquals([$new_stylist], $result);
+        }
+
+        // function save()
+        // {
+        //     //Arrange
+        //     $name = "Victoria";
+        //     $id = 1;
+        //     $new_stylist = new Stylist($name, $id);
+        //
+        //     //Act
+        //     $new_stylist->save();
+        //
+        //     //Assert
+        //     $result = Stylist::getAll();
+        // }
+
 
     }
 

@@ -54,9 +54,13 @@
         function test_save()
         {
             //Assert
-            $name = "John";
-            $stylist_id = null;
+            $stylist_name = "Victoria";
             $id = null;
+            $test_stylist = new Stylist($stylist_name, $id);
+            $test_stylist->save();
+
+            $name = "John";
+            $stylist_id = $test_stylist->getId();
             $new_client = new Client($name, $stylist_id, $id);
 
             //Act

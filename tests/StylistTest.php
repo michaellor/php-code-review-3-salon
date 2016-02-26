@@ -70,12 +70,16 @@
             $id = 1;
             $new_stylist = new Stylist($name, $id);
             $new_stylist->save();
+            $name2 = "Lise";
+            $id = 2;
+            $new_stylist2 = new Stylist($name2, $id);
+            $new_stylist2->save();
 
             //Act
             $result = Stylist::getAll();
 
             //Assert
-            $this->assertEquals([$new_stylist], $result);
+            $this->assertEquals([$new_stylist, $new_stylist2], $result);
         }
 
         function save()

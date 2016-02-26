@@ -21,6 +21,21 @@
             Stylist:deleteAll();
         }
 
+        function test_getName()
+        {
+            //Arrange
+            $name = "Victoria";
+            $id = NULL;
+            $new_stylist = new Stylist($name);
+
+            //Act
+            $result = $new_stylist->getName($name);
+
+            //Assert
+            $assertEquals("Victoria", $result);
+
+        }
+
 
     }
 

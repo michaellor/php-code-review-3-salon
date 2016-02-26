@@ -5,7 +5,7 @@
         private $stylist_name;
         private $id;
 
-        function __construct($stylist_name, $id)
+        function __construct($stylist_name, $id = NULL)
         {
             $this->stylist_name = $stylist_name;
             $this->id = $id;
@@ -26,7 +26,11 @@
             return $this->id;
         }
 
-        
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO stylists (stylist_name) VALUES ('{$this->getName()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
+        }
 
         static function getAll()
         {
@@ -41,6 +45,11 @@
                 array_push($stylists, $new_stylist);
             }
             return $stylists;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stylists;");
         }
 
       }

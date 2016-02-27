@@ -18,13 +18,13 @@
 
       {% for stylist in stylists %}
         <li><a href="/stylists/{{ stylist.getId }}">{{ stylist.getName }}</a>
-        <form action="/stylists/{{ cuisine.getId }}" method="post">
+        <form action="/stylists/{{ stylist.getId }}" method="post">
           <input name="_method" type="hidden" value="delete">
           <button type="submit">Delete</button>
         </form>
         </li>
       {% endfor %}
-
+    <p><a href="/stylists">Back</a></p>
 
   </div>
 </body>

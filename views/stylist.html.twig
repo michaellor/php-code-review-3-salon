@@ -7,14 +7,17 @@
     <h1>{{ stylist.getName }}</h1>
 
           <form action="/stylists/{{ stylist.getId }}" method="post">
-              <label for="name">Client name:</label>
-              <input name="name" type="text">
+              <label for="client_name">Client name:</label>
+              <input name="client_name" type="text">
               <button type="submit">Add Restaurant</button>
           </form>
 
           <ul>
           {% for client in clients %}
-              <li>{{ client.getName }}</li><a href="/stylist/{{ stylist.getId }}/edit/{{ client.getId }}">Edit</a>
+              <li>{{ client.getName }}</li>
+              <form action='/stylist/{{ stylist.getId }}/edit/{{ client.getId }}' method="get">
+                  <button type="submit">Edit</button>
+              </form>
               <form action='/stylists/{{ stylist.getId }}/delete/{{ client.getId }}' method="post">
               <input name="_method" type="hidden" value="delete">
                   <button type="submit">Delete</button>

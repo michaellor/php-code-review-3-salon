@@ -17,12 +17,10 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
-    //Landing page
     $app->get("/", function () use ($app){
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
-    //Page listing stylists
     $app->get("/stylists", function () use ($app){
         return $app['twig']->render('stylists.html.twig', array('stylists' => Stylist::getAll()));
     });
@@ -39,14 +37,12 @@
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $client));
     });
 
-
     $app->get("/stylist/{id}/edit/{client_id}", function ($id, $client_id) use ($app) {
             $stylist = Stylist::find($id);
             $client = Client::find($client_id);
             return $app['twig']->render('client_edit.html.twig', array('stylist' => $stylist, 'client' => $client
             ));
         });
-
 
     $app->patch("/stylists/{id}/edit_client/{client_id}", function ($id, $client_id) use ($app) {
         $stylist = Stylist::find($id);
@@ -56,7 +52,6 @@
         $current_client = $stylist->getClient();
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $current_client));
     });
-
 
     $app->post("/stylists/{id}", function ($id) use ($app) {
         $stylist = Stylist::find($id);
@@ -81,6 +76,5 @@
     });
 
     return $app;
-
 
 ?>

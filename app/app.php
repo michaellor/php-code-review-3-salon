@@ -14,6 +14,9 @@
     'twig.path' => __DIR__.'/../views'
     ));
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+
     //Landing page
     $app->get("/", function () use ($app){
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
@@ -32,7 +35,7 @@
 
     $app->get("/stylists/{id}", function ($id) use ($app) {
         $stylist = Stylist::find($id);
-        $current_client = $stylist->getClients();
+        $current_client = $stylist->getClient();
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $current_client));
     });
 
@@ -45,14 +48,34 @@
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $current_client));
     });
 
-
-
-
+    // 
+    // $app->get("/stylist/{id}/edit/{client_id}", function ($id, $client_id) use ($app) {
+    //         $stylist = Stylist::find($id);
+    //         $client = Client::find($client_id);
+    //         return $app['twig']->render('client_edit.html.twig', array('stylist' => $stylist, 'client' => $client
+    //         ));
+    //     });
+    //
+    // $app->post("/stylists/{id}", function ($id) use ($app) {
+    //     $stylist = Stylist::find($id);
+    //     $new_client = new Client($_POST['client_name'], $id);
+    //     $new_client->save();
+    //     return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist,  'clients' => $stylist->getClient()));
+    // });
 
     $app->delete("/stylists/{id}", function($id) use ($app) {
         $stylist = Stylist::find($id);
         $stylist->delete();
-        return $app['twig']->render('stylists.html.twig', array('stylists' => Stylist::getAll()));
+        $current_clients = $stylist->getClient();
+        return $app['twig']->render('stylists.html.twig', array('stylists' => Stylist::getAll(), 'clients' => $current_clients));
+    });
+
+    $app->delete("/stylists/{id}/delete/{client_id}", function($id, $client_id) use ($app) {
+        $stylist = Stylist::find($id);
+        $client = Client::find($client_id);
+        $client->delete();
+        $current_clients = $stylist->getClient();
+        return $app['twig']->render('stylists.html.twig', array('stylist' => $stylist, 'clients' => $current_clients));
     });
 
     return $app;
